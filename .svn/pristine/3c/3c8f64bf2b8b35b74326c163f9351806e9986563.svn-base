@@ -1,0 +1,14 @@
+package com.brookdale.artiva.ws.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.brookdale.artiva.ws.entity.ContactAgreementEntity;
+import com.brookdale.artiva.ws.entity.MoveOutEntity;
+import com.brookdale.artiva.ws.entity.ReasonEntity;
+
+@Repository
+public interface MoveOutRepository extends CrudRepository<MoveOutEntity,Long> {
+	
+	MoveOutEntity findMoveOutByContactAgreementId(Long contactAgreementId);
+}

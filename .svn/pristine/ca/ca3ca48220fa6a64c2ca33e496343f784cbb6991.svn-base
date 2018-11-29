@@ -1,0 +1,27 @@
+package com.brookdale.artiva.ws.shared.dto;
+
+import java.io.Serializable;
+
+public class ContactAgreementDto implements Serializable{
+
+	private static final long serialVersionUID = 5743869696252617364L;
+
+	private long contactAgreementId;
+	private long contactId;
+
+	public long getContactAgreementId() {
+		return contactAgreementId;
+	}
+
+	public void setContactAgreementId(long contactAgreementId) {
+		this.contactAgreementId = contactAgreementId;
+	}
+
+	public long getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(long contactId) {
+		this.contactId = contactId;
+	}
+}

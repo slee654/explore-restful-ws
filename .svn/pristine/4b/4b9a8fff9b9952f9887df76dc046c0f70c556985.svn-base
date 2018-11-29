@@ -1,0 +1,73 @@
+package com.brookdale.artiva.ws.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity(name="moveout")
+public class MoveOutEntity implements Serializable {	
+
+	private static final long serialVersionUID = -8285831473868184447L;
+	
+	@Id
+	private long moveoutId;
+	
+	@Column(nullable =false)
+	private long contactAgreementId;
+	
+	@Column(nullable =false)
+	private long reasonId; 
+	
+	@Column
+	private Date FinancialRespEndDate; //frEndDate
+	
+	@Column
+	private Date ActualDate; //moveOutDate
+
+	public long getMoveoutId() {
+		return moveoutId;
+	}
+
+	public void setMoveoutId(long moveoutId) {
+		this.moveoutId = moveoutId;
+	}
+
+	public long getContactAgreementId() {
+		return contactAgreementId;
+	}
+
+	public void setContactAgreementId(long contactAgreementId) {
+		this.contactAgreementId = contactAgreementId;
+	}
+
+	public long getReasonId() {
+		return reasonId;
+	}
+
+	public void setReasonId(long reasonId) {
+		this.reasonId = reasonId;
+	}
+
+	public Date getFinancialRespEndDate() {
+		return FinancialRespEndDate;
+	}
+
+	public void setFinancialRespEndDate(Date financialRespEndDate) {
+		FinancialRespEndDate = financialRespEndDate;
+	}
+
+	public Date getActualDate() {
+		return ActualDate;
+	}
+
+	public void setActualDate(Date actualDate) {
+		ActualDate = actualDate;
+	}
+		
+
+}

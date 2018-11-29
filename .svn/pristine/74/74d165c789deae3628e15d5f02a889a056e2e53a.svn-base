@@ -1,0 +1,11 @@
+package com.brookdale.artiva.ws.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.brookdale.artiva.ws.entity.ContactAgreementEntity;
+
+public interface ContactAgreementRepository extends CrudRepository<ContactAgreementEntity,Long>{
+	
+	ContactAgreementEntity findContactAgreementByContactId(long resId);
+
+}

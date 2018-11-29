@@ -1,0 +1,9 @@
+package com.brookdale.artiva.ws.service;
+
+import com.brookdale.artiva.ws.shared.dto.MoveOutDto;
+
+public interface MoveOutService {
+	
+	MoveOutDto createMoveOut(long contactAgreementId);
+	MoveOutDto createMoveOut (long contactAgreementId, long residentId);
+}

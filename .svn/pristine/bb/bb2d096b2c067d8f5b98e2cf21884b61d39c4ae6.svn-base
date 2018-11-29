@@ -1,0 +1,92 @@
+package com.brookdale.artiva.ws.service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.brookdale.artiva.ws.entity.ContactAgreementEntity;
+import com.brookdale.artiva.ws.entity.MoveOutEntity;
+import com.brookdale.artiva.ws.entity.ReasonEntity;
+import com.brookdale.artiva.ws.exception.MoveOutServiceException;
+import com.brookdale.artiva.ws.model.response.MoveOutRest;
+import com.brookdale.artiva.ws.repository.ContactAgreementRepository;
+import com.brookdale.artiva.ws.repository.MoveOutRepository;
+import com.brookdale.artiva.ws.repository.ReasonRepository;
+import com.brookdale.artiva.ws.shared.dto.MoveOutDto;
+
+@Service
+public class MoveOutServiceImpl implements MoveOutService{
+//public class MoveOutServiceImpl implements MoveOutService{
+	
+	@Autowired
+	MoveOutRepository moveOutRepository;
+	
+	@Autowired
+	ReasonRepository reasonRepository;
+	
+	@Autowired
+	ContactAgreementRepository agrRepository;
+
+	//we need to retrieve data from DB and wrap it as an MoveOutEntity, 
+	//then tranfer it as MoveOutDto, send it back to response model "MoveOutRest"
+	//all these will be trigger when the post request comes in.
+	@Override
+	public MoveOutDto createMoveOut (long contactAgreementId) { 
+		MoveOutDto moveOutDto = new MoveOutDto();
+		MoveOutEntity moveOutEntity = moveOutRepository.findMoveOutByContactAgreementId(contactAgreementId);
+		
+		BeanUtils.copyProperties(moveOutDto, moveOutEntity);		
+		return moveOutDto;
+	}
+
+	@Override
+	public MoveOutDto createMoveOut(long rasAgreementId, long resId) {
+		//one big puzzle: if we use RAS agreement Id, how do we use resId or contact agreementId
+		
+		MoveOutDto moveOutDto = new MoveOutDto();		
+		
+		//find contactAgreementId from contactAgreement table based on resId
+		ContactAgreementEntity contactAgreementEntity = agrRepository.findContactAgreementByContactId(resId);
+		if(contactAgreementEntity == null) {
+			MoveOutRest moRest = new MoveOutRest();
+			moRest.setAgrId(rasAgreementId);
+			throw new MoveOutServiceException(moRest);
+		}
+		long contactAgreementId = contactAgreementEntity.getContactAgreementId();
+		
+		//from moveOutEntity, we can get reasonId, FinancialRespEndDate(frEndDate),ActualDate(modate)
+		MoveOutEntity moveOutEntity = moveOutRepository.findMoveOutByContactAgreementId(contactAgreementId);
+		if(moveOutEntity == null) {
+			MoveOutRest moRest = new MoveOutRest();
+			moRest.setAgrId(rasAgreementId);
+			throw new MoveOutServiceException(moRest);
+		}
+		long reasonId = moveOutEntity.getReasonId();
+		
+		//get reasonDesc
+		Optional<ReasonEntity> reason = reasonRepository.findById(reasonId);
+		ReasonEntity reasonEntity = reason.get();
+		
+		String reasonDesc = reasonEntity.getReasonDesc();
+		
+		moveOutDto.setAgreementId(rasAgreementId);//if we want to use RAS agrId, we will replace it with this contactAgreement agrId
+		moveOutDto.setFrEndDate(moveOutEntity.getFinancialRespEndDate());
+		moveOutDto.setMoveOutDate(moveOutEntity.getActualDate());
+		moveOutDto.setMoveReason(reasonDesc);
+		
+		return moveOutDto;
+	}
+	
+	public String DateFormatted(Date date) {
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		return simpleDateFormat.format(date);
+	}
+	
+	
+}

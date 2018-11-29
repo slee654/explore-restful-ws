@@ -1,0 +1,5 @@
+spring.datasource.driver=oracle.jdbc.OracleDriver
+spring.datasource.username=alterranetuser
+spring.datasource.password=power
+spring.datasource.url=jdbc:oracle:thin:@mkeractest-scan.assisted.com:1521/edbunit_oltp.world
+#server.servlet.context-path=/artiva-moveout-ws

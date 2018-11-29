@@ -1,0 +1,36 @@
+package com.brookdale.artiva.ws.exception;
+
+import com.brookdale.artiva.ws.model.response.MoveOutRest;
+
+public class MoveOutServiceException extends RuntimeException{
+
+
+	private static final long serialVersionUID = -7616508919844957218L;
+/*
+	public MoveOutServiceException(String message){
+		super(message);
+	}
+*/
+	private MoveOutRest data;
+	
+	public MoveOutServiceException() {
+		super();
+	}
+
+	public MoveOutServiceException(MoveOutRest data) {
+		super();
+		this.data = data;
+	}
+
+	public MoveOutServiceException(String message) {
+		super(message);
+	}
+
+	public MoveOutRest getData() {
+		return data;
+	}
+
+	public void setData(MoveOutRest data) {
+		this.data = data;
+	}
+}

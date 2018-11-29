@@ -1,0 +1,47 @@
+package com.brookdale.artiva.ws.model.request;
+
+import java.util.Date;
+
+public class MoveOutRequestModel {
+	
+	//requestParms=>AgrId=1234567&ResId=b124&FREndDate=2018-10-31&MODate=2018-10-27&MOReason=Transferred
+	
+	//private Integer moveoutId;
+	private long agreementId; //AgrId
+	private long residentId; //ResId
+	private Date frEndDate; //FREndDate
+	private Date moveoutDate; //MODate
+	private String moveoutReason; //MOReason	
+	
+	public Long getAgreementId() {
+		return agreementId;
+	}
+	public void setAgreementId(Long agreementId) {
+		this.agreementId = agreementId;
+	}
+	public long getResidentId() {
+		return residentId;
+	}
+	public void setResidentId(long residentId) {
+		this.residentId = residentId;
+	}
+	public Date getFrEndDate() {
+		return frEndDate;
+	}
+	public void setFrEndDate(Date frEndDate) {
+		this.frEndDate = frEndDate;
+	}
+	public Date getMoveoutDate() {
+		return moveoutDate;
+	}
+	public void setMoveoutDate(Date moveoutDate) {
+		this.moveoutDate = moveoutDate;
+	}
+	public String getMoveoutReason() {
+		return moveoutReason;
+	}
+	public void setMoveoutReason(String moveoutReason) {
+		this.moveoutReason = moveoutReason;
+	}	
+
+}

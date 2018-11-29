@@ -1,0 +1,9 @@
+package com.brookdale.artiva.ws.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.brookdale.artiva.ws.entity.ReasonEntity;
+
+public interface ReasonRepository extends CrudRepository<ReasonEntity,Long>{
+
+}

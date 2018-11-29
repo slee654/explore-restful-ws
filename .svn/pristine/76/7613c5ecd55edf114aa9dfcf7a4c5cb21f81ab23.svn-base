@@ -1,0 +1,43 @@
+package com.brookdale.artiva.ws.model.response;
+
+public class MoveOutResponse {
+	private String status;
+	private int code;
+	private MoveOutRest data;
+	
+	public MoveOutResponse(String status, int code, MoveOutRest data) {
+		super();
+		this.status = status;
+		this.code = code;
+		this.data = data;
+	}
+	
+	public MoveOutResponse(String status, MoveOutRest data) {
+		super();
+		this.status = status;
+		this.data = data;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public MoveOutRest getData() {
+		return data;
+	}
+
+	public void setData(MoveOutRest data) {
+		this.data = data;
+	}
+
+
+}
